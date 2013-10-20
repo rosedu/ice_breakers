@@ -6,6 +6,7 @@ from flask.ext.restless import APIManager
 from flask.ext.login import current_user, login_user, LoginManager, UserMixin
 
 from crossco.util.singleton import Singleton
+from crossco.util.headers import add_cors_header
 from crossco.config import config
 
 class CApp(flask.Flask):
@@ -17,7 +18,13 @@ class CApp(flask.Flask):
                  static_folder='static', template_folder='templates',
                  instance_path=None, instance_relative_config=False):
         flask.Flask.__init__(self, import_name,
-                                     template_folder=template_folder)
+                                     static_path=static_path,
+                                     static_url_path=static_url_path,
+                                     static_folder=static_folder,
+                                     template_folder=template_folder,
+                                     instance_path=instance_path,
+                                     instance_relative_config=instance_relative_config
+                                     )
         self.config.update(config)
         self.db = flask.ext.sqlalchemy.SQLAlchemy(self)
         self.fb = OAuth().remote_app('facebook',
@@ -38,3 +45,5 @@ class CApp(flask.Flask):
 
 
 app = CApp(__name__, static_folder='webapp', template_folder='webapp', static_url_path='/webapp')
+if app.config['DEBUG']:
+    app.after_request(add_cors_header)

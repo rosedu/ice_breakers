@@ -8,5 +8,5 @@ sys.path.insert(0, dirname)
 from crossco import app
 import crossco.routes
 
-app.run()
+app.run('0.0.0.0')
 
