@@ -15,5 +15,6 @@ setup(name='Crossco',
                         'flask-restless',
                         'flask-sqlalchemy',
                         'facebook',
-                        'oauth']
+                        'oauth',
+                        'gcm-client']
 )
