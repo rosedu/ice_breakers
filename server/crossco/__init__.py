@@ -34,7 +34,7 @@ class CApp(flask.Flask):
                 authorize_url='https://www.facebook.com/dialog/oauth',
                 consumer_key=self.config['FACEBOOK_APP_ID'],
                 consumer_secret=self.config['FACEBOOK_APP_SECRET'],
-                request_token_params={'scope': 'email'})
+                request_token_params={'scope': 'email,manage_pages'})
         self.api_manager = APIManager(self, flask_sqlalchemy_db=self.db)
         self.login_manager = LoginManager()
         self.login_manager.setup_app(self)

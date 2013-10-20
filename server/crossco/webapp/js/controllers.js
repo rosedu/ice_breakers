@@ -14,7 +14,7 @@ angular.module('myApp.controllers', []).
 
         User.query(function(response) {
 
-            $scope.datanew.users = response;
+            $scope.datanew.users = response.objects;
 
         });
 

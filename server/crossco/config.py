@@ -7,5 +7,5 @@ config = {
      'FACEBOOK_APP_ID' : '170058559861738',
      'FACEBOOK_APP_SECRET' :'fbc32b41e6af48cab84a642210be26ed',
      'SESSION_COOKIE_HTTPONLY': False,
-     'SESSION_COOKIE_DOMAIN': 'sniffio.com'
+     'SESSION_COOKIE_DOMAIN': '.sniffio.com'
 }

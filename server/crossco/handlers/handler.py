@@ -17,6 +17,23 @@ def handler(model, **kw):
             kw['search_params']['filters'].append({u'name': u'id', u'val': current_user.id, u'op': u'eq'});
         elif model == Action:
             kw['search_params']['filters'].append({u'name': u'user_id', u'val': current_user.id, u'op': u'eq'});
+        elif model == Service and kw.get('my'):
+            kw['search_params']['filters'].append({u'name': u'admins.id', u'val': current_user.id, u'op': u'eq'});
+
+    elif kw['instance_id'] != str(current_user.id):
+        raise ProcessingException(message='Unauthorized!')
+
+def post_handler(model, **kw):
+    if not current_user.is_authenticated():
+        raise ProcessingException(message='Not authenticated!')
+
+    if 'instance_id' not in kw:
+        #get all users corresponding to me
+        if 'filters' not in kw['search_params']:
+            kw['search_params']['filters'] = []
+        print kw['result']
+        #if model == Service and kw.get('my'):
+        #    kw['search_params']['filters'].append({u'name': u'admins.id', u'val': current_user.id, u'op': u'eq'});
 
     elif kw['instance_id'] != str(current_user.id):
         raise ProcessingException(message='Unauthorized!')
