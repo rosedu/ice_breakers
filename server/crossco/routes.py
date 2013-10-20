@@ -8,7 +8,7 @@ from flask.ext.restless import ProcessingException
 
 from crossco import app
 from crossco.models.models import *
-from crossco.handlers.handler import handler, post_handler
+from crossco.handlers.handler import handler
 
 @app.login_manager.user_loader
 def load_user(userid):
@@ -112,8 +112,7 @@ app.api_manager.create_api(Service,
 app.api_manager.create_api(Service,
                            preprocessors=dict(GET_SINGLE=[lambda **kw: handler(Service, my=True, **kw)],
                                               GET_MANY=[lambda **kw: handler(Service, my=True, **kw)]),
-                           postprocessors=dict(GET_SINGLE=[lambda **kw: post_handler(Service, my=True, **kw)],
-                                              GET_MANY=[lambda **kw: post_handler(Service, my=True, **kw)]),
+
                            methods=['GET', 'POST'], url_prefix='/api/my')
 
 app.api_manager.create_api(Category,

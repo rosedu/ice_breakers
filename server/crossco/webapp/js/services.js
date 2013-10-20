@@ -11,7 +11,7 @@ angular.module('myApp.services', ['ngResource'])
         )
     })
     .factory('User', function($resource){
-        return $resource('http://sniffio.com:5000/api/user',
+        return $resource('http://sniffio.com:5000/api/my/user',
             {}
         )
     })
